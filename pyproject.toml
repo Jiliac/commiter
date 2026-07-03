@@ -1,7 +1,20 @@
 [project]
 name = "commiter"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI commit-message CLI powered by a Fireworks-hosted DeepSeek model"
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.0",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+commiter = "commiter.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/commiter"]
