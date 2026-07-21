@@ -33,6 +33,10 @@ def _err(msg: str) -> None:
 
 
 def run_git(args: list[str], **kwargs) -> subprocess.CompletedProcess:
+    # Git output can contain non-UTF-8 bytes (e.g. a binary file the diff
+    # heuristic misclassifies as text), so decode tolerantly instead of
+    # crashing with UnicodeDecodeError.
+    kwargs.setdefault("errors", "replace")
     return subprocess.run(["git", *args], text=True, capture_output=True, **kwargs)
 
 
