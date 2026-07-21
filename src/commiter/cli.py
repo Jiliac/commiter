@@ -157,6 +157,12 @@ def main() -> None:
     parser.add_argument(
         "-y", "--yes", action="store_true", help="skip the prompt and commit immediately"
     )
+    parser.add_argument(
+        "-s",
+        "--staged-only",
+        action="store_true",
+        help="only commit what is already staged, without staging other changes",
+    )
     parser.add_argument("--model", help="override the model ID for this run")
     args = parser.parse_args()
 
@@ -175,7 +181,8 @@ def main() -> None:
     model = args.model or os.environ.get("FIREWORKS_MODEL") or DEFAULT_MODEL
 
     ensure_git_repo()
-    stage_all()
+    if not args.staged_only:
+        stage_all()
 
     diff = staged_diff()
     if not diff.strip():

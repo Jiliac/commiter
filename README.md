@@ -33,7 +33,7 @@ commiter                 # after a global install (see below)
 
 `commiter`:
 
-1. Stages everything with `git add -A`.
+1. Stages everything with `git add -A` (skipped with `-s` / `--staged-only`).
 2. Reads the staged diff (exits with "nothing to commit" if empty).
 3. Generates a commit message and shows a preview.
 4. Prompts: **[a]ccept / [e]dit / [r]egenerate / [q]uit**.
@@ -44,6 +44,8 @@ commiter                 # after a global install (see below)
 ### Flags
 
 - `-y` / `--yes` — skip the prompt and commit immediately.
+- `-s` / `--staged-only` — only commit what is already staged; skip `git add -A`
+  so untracked or unstaged files stay out of the commit.
 - `--model <id>` — override the model for this run.
 
 ### Configuration
